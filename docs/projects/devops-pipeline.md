@@ -12,10 +12,10 @@ Includes Docker image generation, automated deployment, and testing with Playwri
 ---
 
 ## Embedded demo
-> 🔗 [See full documentation at](https://github.com/hmosqueraturner/ideal-cicd-one/)
+> 🔗 [See full documentation at](https://hmosqueraturner.github.io/ideal-cicd-one/)
 
 <iframe
-  src="https://github.com/hmosqueraturner/ideal-cicd-one/"
+  src="https://hmosqueraturner.github.io/ideal-cicd-one/"
   width="100%"
   height="800"
   style="border:none;border-radius:12px;">

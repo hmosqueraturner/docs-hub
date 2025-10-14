@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-</head>
-<body>
-  <div id="app">Loading documentation...</div>
-  <script>
-    window.$docsify = {
-      name: '🚀 Hector Techno Docs Hub',
-      repo: 'https://github.com/hmosqueraturner/docs-hub',
-      loadSidebar: true,
-      subMaxLevel: 2,
-      themeColor: '#0078D7',
-      search: 'auto',
-      coverpage: false,      
-      executeScript: true,
-      markdown: {
-        renderer: {
-          code: function (code, lang) {
-            if (lang === 'mermaid') {
-              return (
-                '<div class="mermaid">' + code + '</div>'
-              );
-            }
-            return this.origin.code.apply(this, arguments);
-          }
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+    />
+    <style>
+      body,
+      .content {
+        overflow-y: auto !important;
+       
       }
-    };
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-<script src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
-</body>
+
+      iframe {
+        border-radius: 12px;
+        width: 100%;
+        min-height: 800px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">Loading documentation...</div>
+    <script>
+      window.$docsify = {
+        name: "🚀 Hector Techno Docs Hub",
+        repo: "https://hmosqueraturner.github.io/docs-hub",
+        loadSidebar: true,
+        subMaxLevel: 2,
+        themeColor: "#0078D7",
+        executeScript: true,
+        markdown: {
+          renderer: {
+            code: function (code, lang) {
+              if (lang === "mermaid") {
+                return '<div class="mermaid">' + code + "</div>";
+              }
+              return this.origin.code.apply(this, arguments);
+            },
+          },
+        },
+      };
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+    <!-- Docsify v4 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <script src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  </body>
 </html>

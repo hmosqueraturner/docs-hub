@@ -15,12 +15,12 @@ Artificial intelligence agent deployed on Azure, integrated with:
 
 
 ## Embedded demo
-> 🔗 [See full documentation at](https://github.com/hmosqueraturner/ACiD/)
+> 🔗 [See full documentation at](https://hmosqueraturner.github.io/ACiD/)
 
 ---
 
 <iframe
-  src="https://github.com/hmosqueraturner/ACiD/"
+  src="https://hmosqueraturner.github.io/ACiD/"
   width="100%"
   height="800"
   style="border:none;border-radius:12px;">

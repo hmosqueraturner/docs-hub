@@ -11,10 +11,10 @@ All the Augmented Reality or Virtual Reality and 3D initiatives I work on **Blen
 ---
 
 ## Embedded demo
-> 🔗 [See full documentation at](https://github.com/hmosqueraturner/hektek-nes-town)
+> 🔗 [See full documentation at](https://hmosqueraturner.github.io/hektek-nes-town)
 
 <iframe
-  src="https://github.com/hmosqueraturner/hektek-nes-town"
+  src="https://hmosqueraturner.github.io/hektek-nes-town"
   width="100%"
   height="800"
   style="border:none;border-radius:12px;">
