@@ -60,6 +60,42 @@
         width: 100%;
         height: 500px;
       }
+
+      /* Better sidebar styling */
+      .sidebar-nav ul {
+        padding-left: 0;
+      }
+
+      .sidebar-nav > ul > li {
+        padding: 8px 0;
+      }
+
+      .sidebar-nav > ul > li > p {
+        font-weight: 600;
+        margin: 0;
+        padding: 5px 0;
+        cursor: pointer;
+      }
+
+      .sidebar-nav ul ul {
+        padding-left: 20px;
+      }
+
+      .sidebar-nav li {
+        list-style: none;
+      }
+
+      .sidebar-nav a {
+        text-decoration: none;
+        padding: 4px 0;
+        display: block;
+        transition: all 0.2s ease;
+      }
+
+      .sidebar-nav a:hover {
+        color: var(--theme-color) !important;
+        padding-left: 5px;
+      }
     </style>
   </head>
 
@@ -67,15 +103,12 @@
     <div id="app">Loading Docsify Hub...</div>
     <button class="toggle-theme" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
 
-    <!-- ✅ ORDER MATTERS! Load these in the correct sequence -->
-
     <!-- 1️⃣ Docsify core -->
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
     <!-- 2️⃣ Plugins -->
     <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 
     <!-- 3️⃣ Mermaid -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -86,16 +119,57 @@
         name: '🚀 Hector Techno Docs Hub',
         repo: 'https://github.com/hmosqueraturner/docs-hub',
         loadSidebar: true,
-        subMaxLevel: 2,
-        search: 'auto',
+        subMaxLevel: 3,
+        auto2top: true,
+        search: {
+          paths: 'auto',
+          placeholder: 'Search...',
+          noData: 'No results found',
+        },
         homepage: 'README.md',
         themeColor: '#3F51B5',
         executeScript: true,
         alias: { '/.*/_sidebar.md': '/_sidebar.md' },
-        relativePath: true,
+        relativePath: false,
         plugins: [
-          function (hook) {
+          // Custom collapsible sidebar plugin
+          function (hook, vm) {
             hook.doneEach(function () {
+              // Add collapse functionality
+              const sidebarItems = document.querySelectorAll('.sidebar-nav > ul > li');
+              
+              sidebarItems.forEach((item) => {
+                const paragraph = item.querySelector('p');
+                const subList = item.querySelector('ul');
+                
+                if (paragraph && subList) {
+                  // Add arrow indicator
+                  if (!paragraph.querySelector('.arrow')) {
+                    const arrow = document.createElement('span');
+                    arrow.className = 'arrow';
+                    arrow.innerHTML = ' ▼';
+                    arrow.style.fontSize = '0.8em';
+                    arrow.style.transition = 'transform 0.2s ease';
+                    paragraph.appendChild(arrow);
+                  }
+                  
+                  paragraph.style.cursor = 'pointer';
+                  
+                  // Toggle on click
+                  paragraph.onclick = function (e) {
+                    e.preventDefault();
+                    const arrow = this.querySelector('.arrow');
+                    const isHidden = subList.style.display === 'none';
+                    
+                    subList.style.display = isHidden ? 'block' : 'none';
+                    if (arrow) {
+                      arrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+                    }
+                  };
+                }
+              });
+
+              // Mermaid initialization
               if (window.mermaid) {
                 const mermaidBlocks = document.querySelectorAll('.mermaid');
                 if (mermaidBlocks.length) {
@@ -132,7 +206,7 @@
         return theme === 'dark' ? 'dark' : 'neutral';
       }
 
-      // ✅ Init Mermaid once (to avoid race condition)
+      // ✅ Init Mermaid once
       window.addEventListener('DOMContentLoaded', () => {
         mermaid.initialize({ startOnLoad: true, theme: currentMermaidTheme() });
       });
