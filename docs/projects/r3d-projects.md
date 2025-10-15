@@ -5,7 +5,6 @@ All the Augmented Reality or Virtual Reality and 3D initiatives I work on **Blen
 
 ---
 
-
 ## Embedded demo
 > 🔗 [See full documentation at](https://hmosqueraturner.github.io/hektek-city-demo/)
 
