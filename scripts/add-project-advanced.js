@@ -16,8 +16,8 @@ const GROUPS = {
   DevOps: "⚙️ DevOps Pipelines",
   Cloud: "☁️ Cloud Automation",
   Data: "📊 Data Systems",
-  Agents: "🧠 AI Agents",
-  Other: "🧩 Otros Proyectos"
+  R3D: "🎮 AR/VR & 3D Projects",
+  Other: "🧩 Other Projects"
 };
 
 async function ask(question) {
@@ -25,27 +25,34 @@ async function ask(question) {
 }
 
 async function main() {
-  console.log("\n🚀 Añadir nuevo proyecto al Docsify Hub (modo avanzado)\n");
+  console.log("\n🚀 Add a new project to the Docsify Hub (advanced version with Mermaid + responsive iframe)\n");
 
-  const name = await ask("Nombre interno del proyecto (ej: monitoring-stack): ");
-  const title = await ask("Título visible (ej: 📊 Monitoring Stack): ");
-  const description = await ask("Descripción breve: ");
-  const repoUrl = await ask("URL del repo o demo (ej: https://tuusuario.github.io/monitoring-stack/): ");
+  const name = await ask("Internal project name (e.g. monitoring-stack): ");
+  const title = await ask("Visible title (e.g. 📊 Monitoring Stack): ");
+  const description = await ask("Short description: ");
+  const repoUrl = await ask("Repository or live demo URL (e.g. https://youruser.github.io/monitoring-stack/): ");
 
-  console.log("\nGrupos disponibles:");
+  console.log("\nAvailable groups:");
   Object.keys(GROUPS).forEach(g => console.log(` - ${g}`));
-  const group = await ask("Selecciona grupo (AI / DevOps / Cloud / Data / Agents / Other): ");
+  const group = await ask("Select group (AI / DevOps / Cloud / Data / R3D / Other): ");
 
   const groupKey = GROUPS[group] ? group : "Other";
   const groupName = GROUPS[groupKey];
 
   const mdFile = path.join(projectsPath, `${name}.md`);
   if (fs.existsSync(mdFile)) {
-    console.error("❌ Ya existe un archivo con ese nombre en /projects/");
+    console.error("❌ A project with this name already exists in /projects/");
     process.exit(1);
   }
 
-  // 🎨 Plantilla Mermaid por defecto
+  // Detect non-embeddable GitHub URLs and auto-adjust to htmlpreview
+  let embedUrl = repoUrl;
+  if (repoUrl.includes("github.com") && !repoUrl.includes(".github.io")) {
+    embedUrl = `https://htmlpreview.github.io/?${repoUrl}`;
+    console.log("⚠️ URL automatically adjusted for GitHub preview embedding.");
+  }
+
+  // 🎨 Default Mermaid architecture diagram
   const mermaidDiagram = `
 \`\`\`mermaid
 graph TD
@@ -56,49 +63,57 @@ graph TD
 \`\`\`
 `;
 
-  // 🧱 Contenido Markdown del nuevo proyecto
+  // 🌐 Responsive iframe block with graceful fallback
+  const iframeBlock = `
+<div style="position:relative; padding-bottom:60%; height:0; overflow:hidden; border-radius:12px; background:#f5f5f5;">
+  <iframe
+    src="${embedUrl}"
+    style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; border-radius:12px;"
+    allowfullscreen
+    loading="lazy"
+    onerror="this.outerHTML='<div style=\\'padding:2em;text-align:center;color:#666;background:#fafafa;border-radius:12px;\\'>⚠️ Could not load the embedded demo.<br> GitHub may block embedded views.<br><a href=${embedUrl} target=_blank>Open it directly here</a>.</div>'">
+  </iframe>
+</div>
+`;
+
+  // 🧱 Markdown template for the new project page
   const content = `# ${title}
 
-## Descripción
+## Description
 ${description}
 
 ---
 
-## Arquitectura (editable)
+## Architecture (editable)
 ${mermaidDiagram}
 
-> 💡 Puedes editar el diagrama directamente en este bloque para reflejar la arquitectura real del proyecto.
+> 💡 Edit the diagram above to match your real architecture.
 
 ---
 
-## Demo / Documentación
-🔗 [Abrir demo o documentación completa](${repoUrl})
+## Demo / Documentation
+🔗 [Open full demo or documentation](${embedUrl})
 
-<iframe
-  src="${repoUrl}"
-  width="100%"
-  height="800"
-  style="border:none;border-radius:12px;">
-</iframe>
+${iframeBlock}
 
 ---
 
-## Stack Tecnológico
-- Lenguaje principal: 
-- Infraestructura: 
-- CI/CD: 
-- Otros componentes:
+## Tech Stack
+- Main language:
+- Infrastructure:
+- CI/CD:
+- Other components:
 
 ---
 
-## Notas
-> Añade aquí información adicional del proyecto (p. ej. decisiones arquitectónicas, links, diagramas complementarios).
+## Notes
+> Add design decisions, related links or references here.
 `;
 
-  // Crear archivo del proyecto
+  // Create markdown file
   fs.writeFileSync(mdFile, content, "utf8");
 
-  // Leer y actualizar sidebar
+  // Update sidebar
   const sidebar = fs.readFileSync(sidebarFile, "utf8").split("\n");
   const groupHeader = `* ${groupName}`;
   const insertLine = `  * [${title}](projects/${name}.md)`;
@@ -112,10 +127,11 @@ ${mermaidDiagram}
 
   fs.writeFileSync(sidebarFile, sidebar.join("\n"), "utf8");
 
-  console.log(`\n✅ Proyecto añadido: ${title}`);
-  console.log(`📁 Archivo: docs/projects/${name}.md`);
-  console.log(`📚 Grupo: ${groupName}`);
-  console.log("🧩 Incluye bloque Mermaid para diagrama de arquitectura.");
+  console.log(`\n✅ Project added: ${title}`);
+  console.log(`📁 File: docs/projects/${name}.md`);
+  console.log(`📚 Group: ${groupName}`);
+  console.log(`🌐 Embedded URL: ${embedUrl}`);
+  console.log("🧩 Includes Mermaid diagram and responsive iframe with fallback.\n");
   rl.close();
 }
 

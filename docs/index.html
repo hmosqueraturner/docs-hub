@@ -2,58 +2,140 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Document</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Description" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-    />
+    <title>Docsify Hub – DevOps / AI / Cloud Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ✅ CSS theme -->
     <link
       rel="stylesheet"
-      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+      href="https://cdn.jsdelivr.net/npm/docsify-themeable@0.8.0/dist/css/theme-simple.css"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.min.css"
+    />
+
     <style>
-      body,
-      .content {
-        overflow-y: auto !important;
-       
+      :root {
+        --theme-color: #3f51b5;
+        --background-color: #f9f9fb;
+        --text-color: #222;
+        --sidebar-background: #fff;
+        --sidebar-border: #e0e0e0;
+        --link-color: var(--theme-color);
+      }
+
+      [data-theme='dark'] {
+        --background-color: #121212;
+        --text-color: #e0e0e0;
+        --sidebar-background: #1a1a1a;
+        --sidebar-border: #333;
+        --link-color: #82aaff;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: var(--background-color);
+        color: var(--text-color);
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .toggle-theme {
+        cursor: pointer;
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        z-index: 1000;
+        padding: 8px;
+        border-radius: 50%;
+        background: var(--sidebar-background);
+        border: 1px solid var(--sidebar-border);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       }
 
       iframe {
-        border-radius: 12px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
         width: 100%;
-        min-height: 800px;
-        overflow: auto;
+        height: 500px;
       }
     </style>
   </head>
+
   <body>
-    <div id="app">Loading documentation...</div>
+    <div id="app">Loading Docsify Hub...</div>
+    <button class="toggle-theme" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button>
+
+    <!-- ✅ ORDER MATTERS! Load these in the correct sequence -->
+
+    <!-- 1️⃣ Docsify core -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+    <!-- 2️⃣ Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+
+    <!-- 3️⃣ Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
     <script>
+      // 🧠 Docsify Config
       window.$docsify = {
-        name: "🚀 Hector Techno Docs Hub",
-        repo: "https://github.com/hmosqueraturner/docs-hub",
+        name: '🚀 Hector Techno Docs Hub',
+        repo: 'https://github.com/hmosqueraturner/docs-hub',
         loadSidebar: true,
         subMaxLevel: 2,
-        themeColor: "#0078D7",
+        search: 'auto',
+        homepage: 'README.md',
+        themeColor: '#3F51B5',
         executeScript: true,
-        markdown: {
-          renderer: {
-            code: function (code, lang) {
-              if (lang === "mermaid") {
-                return '<div class="mermaid">' + code + "</div>";
+        alias: { '/.*/_sidebar.md': '/_sidebar.md' },
+        relativePath: true,
+        plugins: [
+          function (hook) {
+            hook.doneEach(function () {
+              if (window.mermaid) {
+                const mermaidBlocks = document.querySelectorAll('.mermaid');
+                if (mermaidBlocks.length) {
+                  mermaid.initialize({
+                    startOnLoad: false,
+                    theme: currentMermaidTheme(),
+                    securityLevel: 'loose',
+                  });
+                  mermaid.init(undefined, '.mermaid');
+                }
               }
-              return this.origin.code.apply(this, arguments);
-            },
+            });
           },
-        },
+        ],
       };
-      mermaid.initialize({ startOnLoad: true });
+
+      // 🌑 Dark/Light Toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+      themeToggle.addEventListener('click', () => {
+        const newTheme =
+          document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        if (window.mermaid) mermaid.initialize({ theme: currentMermaidTheme() });
+      });
+
+      function currentMermaidTheme() {
+        const theme = document.documentElement.getAttribute('data-theme');
+        return theme === 'dark' ? 'dark' : 'neutral';
+      }
+
+      // ✅ Init Mermaid once (to avoid race condition)
+      window.addEventListener('DOMContentLoaded', () => {
+        mermaid.initialize({ startOnLoad: true, theme: currentMermaidTheme() });
+      });
     </script>
-    <!-- Docsify v4 -->
-    <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-    <script src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
   </body>
 </html>
