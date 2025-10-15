@@ -5,6 +5,7 @@
   - [LangChain + Azure Pipelines](/projects/langchain-azure.md)
   - [RAG Implementation](/projects/rag-system.md)
   - [AI-assisted Testing](/projects/self-healing-tests.md)
+  - [Smart Regression Agents](projects/smart-regression.md)
 
 - **⚙️ DevOps Pipelines**
   - [Ideal CI/CD One](/projects/devops-pipeline.md)
@@ -27,3 +28,4 @@
 - **🧩 Other Projects**
   - [Miscellaneous Utilities](/projects/dev-prototypes.md)
   - [Release Documentation Bot](/projects/docbot.md)
+
