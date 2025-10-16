@@ -1,14 +1,28 @@
 # ⚙️ DevOps Pipeline Demo
 
 ## Description
-Multi-stage CI/CD pipeline deployed on Azure Container Apps.
-Includes Docker image generation, automated deployment, and testing with Playwright.
+A comprehensive example project demonstrating modern DevOps practices for building, testing, packaging, and deploying a simple Node.js (React) application using GitHub Actions, Terraform, and Azure Container Apps.
+
+This complete project is generated using **ACiD by @hmosqueraturner**
 
 ---
 
 ## Diagram
-![DevOps Pipeline](../assets/acid-one.png)
 
+```mermaid
+graph TD
+    subgraph CI/CD Pipeline
+        A[GitHub Actions] --> B[Docker Build]
+        B --> C[SonarCloud Analysis]
+        B --> D[Nexus Publish]
+        D --> E[Terraform Apply]
+    end
+    subgraph Azure
+        F[Azure Container Apps]
+    end
+    E --> F
+    F --> G[Running React App]
+```
 ---
 
 ## Embedded demo
