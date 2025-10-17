@@ -1,7 +1,7 @@
 # 🎮 Hektek City Demo Project
 
 ## Description
-All the Augmented Reality or Virtual Reality and 3D initiatives I work on **Blender**, **R3F** and **Omniverse**.
+An interactive 3D portfolio built with **React Three Fiber**, **Blender**, **Omniverse**, and **Vite**.
 
 ---
 
@@ -17,8 +17,15 @@ All the Augmented Reality or Virtual Reality and 3D initiatives I work on **Blen
 
 ---
 
+This demo repository is a public mirror of the documentation on the private one used for production purposses and i not complete in terms of code.
+
+---
+
 ## Stack
-- **Blender / Omniverse**
+- **Blender**
+- **Omniverse**
 - **React + Three + Fiber**
 - **Vite**
 - **Vercel**
+- **Github Actions**
+- **Drei**

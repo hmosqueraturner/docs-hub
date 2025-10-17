@@ -1,7 +1,7 @@
-# Real-time GLB Controller
+# 🎬 Real-time Omniverse Scene Ctrl
 
 ## Description
-visualization of 3D models and multimedia assets
+Visualization of 3D models and multimedia assets using glb/glt or glb + tsx to interact with the content. 
 
 ---
 
@@ -16,13 +16,17 @@ graph TD
 ```
 
 
-> 💡 Edit the diagram above to match your real architecture.
+> 💡 Architecture details including NVIDIA Omnivrse Workflow.
 
 ---
 
-## Demo / Documentation
-🔗 [Open full demo or documentation](https://hmosqueraturner.github.io/scene-controller)
+## Demos
+🎬 [Demo pure GLB manipulation](https://hmosqueraturner.github.io/scene-controller)
+🎬 [Demo GLB + Typescript](https://hmosqueraturner.github.io/scene-controller-types)
 
+
+## Documentation
+🔗 [Open documentation](https://hmosqueraturner.github.io/scene-controller-types)
 
 <div style="position:relative; padding-bottom:60%; height:0; overflow:hidden; border-radius:12px; background:#f5f5f5;">
   <iframe
@@ -41,7 +45,7 @@ graph TD
 - Main language: Typescript
 - Infrastructure: Vercel
 - CI/CD: Github Actions
-- Other components: React, Three, Fiber
+- Other components: Nvidia Omniverse, React, Three, Fiber, Vite, Drei
 
 ---
 

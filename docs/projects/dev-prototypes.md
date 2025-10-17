@@ -1,12 +1,16 @@
-# 🧩 Other Dev Projects
+# 🧩 Other Dev Projects 🚧
 
 ## Description
 Other Dev, Front or Full stack project or initiatives I've workin using **React**, **Typescript**, **Java**, **.NET**, and **more**.
+
 
 ---
 
 ## Diagram
 ![Other Dev Projects](../assets/softpro.png)
+
+---
+>🚧 Real architectures in progress.
 
 ---
 

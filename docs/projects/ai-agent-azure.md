@@ -1,18 +1,13 @@
 # 🤖 AI Agent for Azure
 
 ## Description
-Artificial intelligence agent deployed on Azure, integrated with:
-- JIRA + XRAY for test management
-- Bitbucket + Jenkins for CI/CD
-- Azure OpenAI for contextual inference and analysis
+Azure AI Agent for Release Intelligence developed using Flowise.
+
+1. Queries Jira and Bitbucket to retrieve all information related to a release (fix version).
+2. Indexes results using Azure Cognitive Search with OpenAI embeddings.
+3. Allows semantic queries on indexed data using LangChain.
 
 ---
-
-## Architecture
-![Azure Architecture](../assets/servantLiBP.png)
-
----
-
 
 ## Embedded demo
 > 🔗 [See full documentation at](https://hmosqueraturner.github.io/ACiD/)
@@ -28,7 +23,9 @@ Artificial intelligence agent deployed on Azure, integrated with:
 ---
 
 ## Stack
-- **LangChain + Azure OpenAI**
-- **Jenkins Pipelines**
+- **Azure OpenAI**
+- **Azure Functions**
+- **Azure Cognitive Search**
 - **JIRA Automation + Webhooks**
-- **Python + FastAPI**
+- **Python**
+- **Jira API + Bitbucket API**
