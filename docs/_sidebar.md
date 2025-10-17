@@ -26,4 +26,4 @@
 
 - **🧩 Other Projects**
   - [Miscellaneous Utilities](/projects/dev-prototypes.md)
-  - [Release Documentation Bot](/projects/ht-docbot.md)
+  - [Web Feli.com](/projects/web-feli.md)
