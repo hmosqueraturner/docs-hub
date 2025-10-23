@@ -14,9 +14,10 @@
 - **🎮 AR/VR & 3D Projects**  
   - [Hektek City - R3F Portfolio](/projects/r3d-projects.md)
   - [3D Portfolio Scroll](projects/portfolio-scroll.md)
-  - [Real-time Omniverse Scene Ctrl](projects/scene-controller.md) 
+  - [Real-time Omniverse Scene Ctrl](projects/scene-controller.md)
 
 - **☁️ Cloud Automation**
+  - [Nicky Bucket 4 VSCode](/projects/nicky-bucket.md)
   - [Azure Container Apps Setup](/projects/azure-container.md)
   - [Cloud Acid-one](/projects/cloud-automation.md)
 

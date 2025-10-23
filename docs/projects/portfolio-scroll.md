@@ -15,7 +15,6 @@ graph TD
   C --> E[External Services]
 ```
 
-
 > 🚧 Real architectures in progress.
 
 ---

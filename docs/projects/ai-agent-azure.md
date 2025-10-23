@@ -1,6 +1,7 @@
 # 🤖 AI Agent for Azure
 
 ## Description
+
 Azure AI Agent for Release Intelligence developed using Flowise.
 
 1. Queries Jira and Bitbucket to retrieve all information related to a release (fix version).
@@ -10,6 +11,7 @@ Azure AI Agent for Release Intelligence developed using Flowise.
 ---
 
 ## Embedded demo
+
 > 🔗 [See full documentation at](https://hmosqueraturner.github.io/ACiD/)
 
 ---
@@ -23,6 +25,7 @@ Azure AI Agent for Release Intelligence developed using Flowise.
 ---
 
 ## Stack
+
 - **Azure OpenAI**
 - **Azure Functions**
 - **Azure Cognitive Search**

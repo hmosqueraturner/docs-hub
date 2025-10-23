@@ -38,24 +38,30 @@ graph TD
 
 ## 🛠️ Deployment
 
-1. **Provision Azure resources**  
+1. **Provision Azure resources**
+
    Use the Bicep files in [infra/](infra) to deploy all required resources:
-   ```sh
+
+
+  ```sh
    az deployment group create \
      --resource-group <your-rg> \
      --template-file infra/main.bicep \
      --parameters @infra/parameters/dev.parameters.json
-   ```
+  ```
 
-2. **Build and push Docker images**  
+2. **Build and push Docker images**
+
+
    Build each app and push to ACR:
-   ```sh
+   
+  ```sh
    docker build -t <acr>.azurecr.io/create-campaign:latest apps/create-campaign
    docker build -t <acr>.azurecr.io/evaluate-release:latest apps/evaluate-release
    docker build -t <acr>.azurecr.io/update-rag:latest apps/update-rag
    docker build -t <acr>.azurecr.io/front-react:latest apps/front-react
    docker push <acr>.azurecr.io/<app>:latest
-   ```
+  ```
 
 3. **Deploy container apps**  
    Container Apps are deployed via Bicep modules in `main.bicep`.
